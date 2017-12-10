@@ -20,8 +20,19 @@ void printargs(int arg1, ...)
 
 int main(void)
 {
-	int test[4] = {12, 12 , 12, 42};
-	printf("%-+--6d", 192);
+	int		test[4] = {12, 12 , 12, 42};
+	char	*var = "test";
+
+	printf("%-+--6d\n", 192);
+
+	"%-6d"	6 de longueur mini, espaces a droite
+	"%6d"	6 de longueur mini, espaces a droite
+	"%s"
+		printf("test%%\n");
+	printf("%016s\n", var);
+	printf("%**d", 6, 8);
+	//printf(")
+
   // printargs(5, 2, 14, 84, 97, 15, -1, "test", 48, -1);
  //  printargs(84, 51, -1);
    //printargs(-1);
