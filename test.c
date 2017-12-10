@@ -28,6 +28,7 @@ int main(void)
 	"%-6d"	6 de longueur mini, espaces a droite
 	"%6d"	6 de longueur mini, espaces a droite
 	"%s"
+	https://www.lix.polytechnique.fr/~liberti/public/computing/prog/c/C/FUNCTIONS/format.html
 		printf("test%%\n");
 	printf("%016s\n", var);
 	printf("%**d", 6, 8);
