@@ -6,7 +6,7 @@
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 12:09:36 by abezanni          #+#    #+#             */
-/*   Updated: 2017/12/04 12:09:46 by abezanni         ###   ########.fr       */
+/*   Updated: 2017/12/12 13:23:29 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_nbr_len(int n)
 	int back;
 
 	back = 0;
-	if (n < 0)
+	if (n < 0 || n == 0)
 		back++;
 	while (n)
 	{

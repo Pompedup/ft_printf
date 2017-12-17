@@ -1,42 +1,69 @@
 #include <stdio.h>
-#include <stdarg.h>
+#include <limits.h>
 
-/* print all args one at a time until a negative argument is seen;
-   all args are assumed to be of int type */
-void printargs(int arg1, ...)
+/*
+static int ft_nbr_len_base(long long n, int base)
 {
-	va_list ap;
-	char *test;
-	int i;
+	int back;
 
-	va_start(ap, arg1);
-	for (i = arg1; i >= 0; i = va_arg(ap, int))
-		printf("%d ", i);
-	test = va_arg(ap, char*);
-	printf("%s", test);
-	va_end(ap);
-	putchar('\n');
+	back = 0;
+	if (n == 0)
+		back++;
+	while (n)
+	{
+		n /= base;
+		back++;
+	}
+	return (back);
 }
 
-int main(void)
+static void	ft_rec_htoa(char *back, long long n, int i)
 {
-	int		test[4] = {12, 12 , 12, 42};
-	char	*var = "test";
-
-	printf("%-+--6d\n", 192);
-
-	"%-6d"	6 de longueur mini, espaces a droite
-	"%6d"	6 de longueur mini, espaces a droite
-	"%s"
-	https://www.lix.polytechnique.fr/~liberti/public/computing/prog/c/C/FUNCTIONS/format.html
-		printf("test%%\n");
-	printf("%016s\n", var);
-	printf("%**d", 6, 8);
-	//printf(")
-
-  // printargs(5, 2, 14, 84, 97, 15, -1, "test", 48, -1);
- //  printargs(84, 51, -1);
-   //printargs(-1);
-   //printargs(1, -1);
-   return 0;
+	if (n)
+	{
+		if (n % 16 > 9)
+			back[i] = n % 16 + 87;
+		else
+			back[i] = n % 16 + 48;
+		ft_rec_htoa(back, n / 16, --i);
+	}
 }
+
+char	*ft_hmaxtoa(long long n)
+{
+	char *back;
+	int len;
+
+	len = ft_nbr_len_base(n, 16);
+	if (!(back = (char*)malloc(len + 1)))
+		return (0);
+	back[len] = 0;
+	ft_rec_htoa(back, n, --len);
+	return (back);
+}*/
+/*
+int	maiin()
+{
+	unsigned char c;
+
+	c = 0;
+	long long oui = LONG_MAX + 1;
+	char r = 12;
+	printf("%d\n", c);
+	c += 1 << 4;
+	printf("%d\n", c);
+	if (c ^ 16)
+	c += 1 << 4;
+	printf("%d\n", c);
+	printf("%lhhd", r);
+	//printf("0x%s\n%p\n", ft_hmaxtoa(c), c);
+	//printf("%hhhd", (long long)5);
+	return (0);
+}
+*//*
+h 1
+hh 2
+l 4
+ll 8
+j 16
+z 32*/
