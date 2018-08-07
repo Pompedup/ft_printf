@@ -6,7 +6,7 @@
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:38:10 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/07 19:25:37 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/07 23:01:01 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,14 @@ static void	ft_init(t_printf *dt, char *str, char *buf, t_list **lst)
 	ft_bzero(buf, 100);
 }
 
+char		*ft_test(char *str, int *pos_s, int *size)
+{
+	while (str[*size] && !ft_strchr("%{[", str[*size]) && *size < 99)
+		(*size)++;
+	(*pos_s) += *size;
+	return (ft_strndup(str, *size));
+}
+
 int			ft_printf(char *str, ...)
 {
 	static t_printf	dt;
@@ -78,17 +86,11 @@ int			ft_printf(char *str, ...)
 	{
 		size = 0;
 		if (!ft_strchr("%{[", dt.str[dt.pos_s]))
-		{
-			while (dt.str[dt.pos_s] && !ft_strchr("%{[", dt.str[dt.pos_s])
-				&& size < 99)
-				buf[size++] = dt.str[dt.pos_s++];
-			buf[size] = 0;
-			dt.tmp = ft_strdup(buf);
-		}
+			dt.tmp = ft_test(dt.str + dt.pos_s, &(dt.pos_s), &size);
 		else
 			size = ft_verif_char(&dt);
 		dt.tot += size;
-		ft_list_push_back(&lst, ft_listnew(dt.tmp, size));
+		ft_listpushback(&lst, ft_listnew(dt.tmp, size));
 	}
 	return (ft_go_print(dt, lst));
 }

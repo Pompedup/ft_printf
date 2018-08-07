@@ -6,7 +6,7 @@
 #    By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/03 18:57:57 by abezanni          #+#    #+#              #
-#    Updated: 2018/02/26 18:31:42 by abezanni         ###   ########.fr        #
+#    Updated: 2018/08/07 22:02:49 by abezanni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,17 +14,17 @@ OBJ = $(SRC:.c=.o)
 
 CC = @gcc
 
-SRC_NAME =	ft_annexes.c\
-			ft_annexes2.c\
-			ft_annexes3.c\
-			ft_annexes4.c\
-			ft_annexes5.c\
-			ft_color.c\
-			ft_present_flag.c\
+SRC_NAME =	conv/ft_annexes.c\
+			conv/ft_annexes2.c\
+			conv/ft_annexes3.c\
+			conv/ft_annexes4.c\
+			conv/ft_annexes5.c\
+			color/ft_color.c\
+			flag/ft_present_flag.c\
 			ft_printf.c\
-			ft_retouche.c\
-			ft_retouche2.c\
-			ft_value_flag.c\
+			flag/ft_retouche.c\
+			flag/ft_retouche2.c\
+			flag/ft_value_flag.c\
 
 SRC = $(addprefix src/,$(SRC_NAME))
 
