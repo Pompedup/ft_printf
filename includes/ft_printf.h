@@ -6,7 +6,7 @@
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:38:37 by abezanni          #+#    #+#             */
-/*   Updated: 2018/02/26 18:20:09 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/07 19:22:15 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-# include "../libft/libft.h"
+# include "../libft/inc/libft.h"
+
+# define CONV "sSpbdDioOuUxXcC%"
+# define FLAG ".+-0# hljz"
 
 typedef struct s_printf	t_printf;
 

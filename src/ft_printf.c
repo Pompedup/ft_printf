@@ -6,7 +6,7 @@
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:38:10 by abezanni          #+#    #+#             */
-/*   Updated: 2018/02/14 18:34:15 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/07 19:25:37 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static int	ft_verif_char(t_printf *dt)
 		return (ft_color(dt));
 	else if (dt->str[dt->pos_s - 1] == '[')
 		return (ft_color_back(dt));
-	else if (ft_strchr("sSpbdDioOuUxXcC%", dt->str[dt->pos_s]) != NULL)
+	else if (ft_strchr(CONV, dt->str[dt->pos_s]) != NULL)
 		return (ft_value_flag(dt));
-	else if (ft_strchr(".+-0# hljz", dt->str[dt->pos_s]) != NULL
+	else if (ft_strchr(FLAG, dt->str[dt->pos_s]) != NULL
 		|| ft_isdigit(dt->str[dt->pos_s]))
 		return (ft_present_flag(dt));
 	dt->tmp = (char*)malloc(1);
@@ -88,7 +88,7 @@ int			ft_printf(char *str, ...)
 		else
 			size = ft_verif_char(&dt);
 		dt.tot += size;
-		ft_lst_push_back(&lst, ft_lstnew(dt.tmp, size));
+		ft_list_push_back(&lst, ft_listnew(dt.tmp, size));
 	}
 	return (ft_go_print(dt, lst));
 }

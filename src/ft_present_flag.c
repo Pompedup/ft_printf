@@ -6,7 +6,7 @@
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:30:21 by abezanni          #+#    #+#             */
-/*   Updated: 2018/02/14 18:26:35 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/07 19:23:20 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	ft_apply_flag(t_printf *dt, t_flags data)
 	else
 	{
 		if (!dt->str[dt->pos_s] ||
-			!(ft_strchr("sSpbdDioOuUxXcC%", dt->str[dt->pos_s])))
+			!(ft_strchr(CONV, dt->str[dt->pos_s])))
 			size = ft_nochar(dt);
 		else
 			size = ft_value_flag(dt);
@@ -112,18 +112,16 @@ int			ft_present_flag(t_printf *dt)
 {
 	t_flags	data;
 	char	*tmp;
-	char	*tmp1;
 
 	data.space = 0;
 	data.forme = 0;
 	data.convert = 0;
 	data.precision = 0;
-	tmp1 = ".+ -0#hljz";
-	while (((tmp = ft_strchr(tmp1, dt->str[dt->pos_s])) && dt->str[dt->pos_s])
+	while (((tmp = ft_strchr(FLAG, dt->str[dt->pos_s])) && dt->str[dt->pos_s])
 		|| ft_isdigit(dt->str[dt->pos_s]))
 	{
 		if (tmp)
-			ft_manage_flag(dt, &data, tmp - tmp1);
+			ft_manage_flag(dt, &data, tmp - FLAG);
 		else
 		{
 			data.space = ft_atoi(dt->str + dt->pos_s);
