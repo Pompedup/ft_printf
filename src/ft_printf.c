@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adibou <adibou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:38:10 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/07 19:25:37 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/08 12:17:42 by adibou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int			ft_printf(char *str, ...)
 		else
 			size = ft_verif_char(&dt);
 		dt.tot += size;
-		ft_list_push_back(&lst, ft_listnew(dt.tmp, size));
+		ft_listpushback(&lst, ft_listnew(dt.tmp, size));
 	}
 	return (ft_go_print(dt, lst));
 }
