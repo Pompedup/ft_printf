@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adibou <adibou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:38:37 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/07 19:22:15 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/08 12:30:30 by adibou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "../libft/inc/libft.h"
 
 # define CONV "sSpbdDioOuUxXcC%"
-# define FLAG ".+-0# hljz"
+# define FLAG ".+ -0#hljz"
 
 typedef struct s_printf	t_printf;
 
