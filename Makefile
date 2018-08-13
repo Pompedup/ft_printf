@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+         #
+#    By: adibou <adibou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/03 18:57:57 by abezanni          #+#    #+#              #
-#    Updated: 2018/02/26 18:31:42 by abezanni         ###   ########.fr        #
+#    Updated: 2018/08/14 01:34:54 by adibou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,14 @@ SRC_NAME =	ft_annexes.c\
 			ft_color.c\
 			ft_present_flag.c\
 			ft_printf.c\
-			ft_retouche.c\
-			ft_retouche2.c\
 			ft_value_flag.c\
+			c.c\
+			d.c\
+			h.c\
+			o.c\
+			s.c\
+			u.c\
+			p.c\
 
 SRC = $(addprefix src/,$(SRC_NAME))
 

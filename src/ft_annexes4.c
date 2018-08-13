@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_annexes5.c                                      :+:      :+:    :+:   */
+/*   ft_annexes4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adibou <adibou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/07 16:59:58 by abezanni          #+#    #+#             */
-/*   Updated: 2018/02/14 18:23:00 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/13 03:02:25 by adibou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,27 @@ char	*ft_conv_c(t_printf *dt, char c, unsigned char conv)
 	return (conv & 4 ? ft_majc(dt, c) : ft_minc(dt, c));
 }
 
+char	*ft_test(t_printf *dt)
+{
+	char *back;
+
+	back = va_arg(dt->ap, char*);
+	if (!back)
+		back = ft_strdup("(null)");
+	else
+		back = ft_strdup(back);
+	return (back);
+}
+
 char	*ft_conv_s(t_printf *dt, char c, unsigned char conv)
 {
-	return (conv & 4 ? ft_majs(dt, c) : ft_mins(dt, c));
+	if (conv & 4)
+		return (ft_majs(dt, c));
+	return (conv & 8 ? ft_test(dt) : ft_mins(dt, c));
+}
+
+char	*ft_bigs(t_printf *dt, char c, unsigned char conv)
+{
+	(void)conv;
+	return (ft_majs(dt, c));
 }

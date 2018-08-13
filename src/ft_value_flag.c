@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_value_flag.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adibou <adibou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:30:51 by abezanni          #+#    #+#             */
-/*   Updated: 2018/02/14 18:30:16 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/13 02:58:36 by adibou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	ft_value_flag_conv(t_printf *dt, t_flags data)
 		{"di", ft_conv_int},
 		{"bouxX", ft_conv_other},
 		{"c", ft_conv_c},
-		{"sS", ft_conv_s},
+		{"s", ft_conv_s},
+		{"S", ft_bigs},
 		{NULL, NULL},
 	};
 	t_ft_conv			*ptr;

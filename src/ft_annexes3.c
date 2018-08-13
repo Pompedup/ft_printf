@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_annexes4.c                                      :+:      :+:    :+:   */
+/*   ft_annexes3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adibou <adibou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/07 16:59:34 by abezanni          #+#    #+#             */
-/*   Updated: 2018/02/14 18:27:30 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/13 01:38:38 by adibou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ char	*ft_majs(t_printf *dt, char c)
 {
 	char	*tmp;
 	char	*back;
-	int		*tab;
+	wchar_t		*tab;
 	int		i;
 
 	(void)c;
-	back = NULL;
-	tab = va_arg(dt->ap, int*);
+	tab = va_arg(dt->ap, wchar_t*);
 	if (!tab)
 		return (ft_strdup("(null)"));
 	else if (!tab[0])
 		return (ft_strdup(""));
+	back = ft_strdup("");
 	i = -1;
 	while (tab[++i] != 0)
 	{
@@ -59,7 +59,7 @@ char	*ft_majs(t_printf *dt, char c)
 			free(tmp);
 			return (back);
 		}
-		back = back == NULL ? tmp : ft_strmjoin(back, tmp, 3);
+		back = ft_strmjoin(back, tmp, 3);
 	}
 	return (back);
 }

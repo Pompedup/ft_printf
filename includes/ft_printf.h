@@ -6,7 +6,7 @@
 /*   By: adibou <adibou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:38:37 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/08 12:30:30 by adibou           ###   ########.fr       */
+/*   Updated: 2018/08/14 01:34:23 by adibou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 
 # define CONV "sSpbdDioOuUxXcC%"
 # define FLAG ".+ -0#hljz"
+# define DOT 1
+# define PLUS 2
+# define SPACE 4
+# define MINUS 8
+# define ZERO 16
+# define HASH 32
 
 typedef struct s_printf	t_printf;
 
@@ -62,7 +68,7 @@ typedef struct	s_flags
 ** ft_annexes.c
 */
 char			*ft_adress(t_printf *dt, char c);
-char			*ft_wctoa(int val);
+char			*ft_wctoa(wchar_t val);
 
 /*
 ** ft_annexes2.c
@@ -88,6 +94,7 @@ char			*ft_conv_int(t_printf *dt, char c, unsigned char conv);
 char			*ft_conv_other(t_printf *dt, char c, unsigned char conv);
 char			*ft_conv_c(t_printf *dt, char c, unsigned char conv);
 char			*ft_conv_s(t_printf *dt, char c, unsigned char conv);
+char			*ft_bigs(t_printf *dt, char c, unsigned char conv);
 
 /*
 ** ft_annexes5.c
@@ -112,26 +119,36 @@ int				ft_present_flag(t_printf *dt);
 */
 int				ft_printf(char *str, ...);
 
-/*
-**	ft_retouche.c
-*/
-char			*ft_space(t_printf *dt, char *str, char *tmp, int sens);
-char			*ft_signe(t_printf *dt, t_flags *data, char *str, int *size);
-int				ft_char_null(t_printf *dt, t_flags data, char *str);
-char			*ft_data(t_printf *dt, t_flags *data, int *size, char *tmp);
-int				ft_nochar(t_printf *dt);
-
-/*
-**	ft_retouche2.c
-*/
-char			*ft_hashtag(t_printf *dt, t_flags *data, char *str, int *size);
-char			*ft_add_precision(t_printf *dt, t_flags *data,
-					int *size, char *tmp);
+///*
+//**	ft_retouche.c
+//*/
+//char			*ft_space(t_printf *dt, char *str, char *tmp, int sens);
+//char			*ft_signe(t_printf *dt, t_flags *data, char *str, int *size);
+//int				ft_char_null(t_printf *dt, t_flags data, char *str);
+//char			*ft_data(t_printf *dt, t_flags *data, int *size, char *tmp);
+//int				ft_nochar(t_printf *dt);
+//
+///*
+//**	ft_retouche2.c
+//*/
+//char			*ft_hashtag(t_printf *dt, t_flags *data, char *str, int *size);
+//char			*ft_add_precision(t_printf *dt, t_flags *data,
+//					int *size, char *tmp);
 
 /*
 ** ft_value_flag.c
 */
 int				ft_value_flag(t_printf *dt);
 int				ft_value_flag_conv(t_printf *dt, t_flags data);
+
+
+
+char	*flags_char(char *str, int size, t_flags data, char c);
+char	*flags_decimal(char *str, int size, t_flags data);
+char	*flags_hexa(char *str, int size, t_flags data, char c);
+char	*flags_octal(char *str, int size, t_flags data);
+char	*flags_string(char *str, int size, t_flags data);
+char	*flags_unsigned(char *str, int size, t_flags data);
+char	*flags_address(char *str, int size, t_flags data);
 
 #endif

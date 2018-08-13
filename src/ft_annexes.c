@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_annexes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adibou <adibou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 13:35:14 by abezanni          #+#    #+#             */
-/*   Updated: 2018/02/26 18:22:57 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/13 00:54:07 by adibou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void		ft_sort_char(unsigned char *back, int c, int size)
 **	Gestion des unicodes
 */
 
-char			*ft_wctoa(int c)
+char			*ft_wctoa(wchar_t c)
 {
 	char			*back;
 	unsigned int	bin;
