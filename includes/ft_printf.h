@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adibou <adibou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:38:37 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/14 01:34:23 by adibou           ###   ########.fr       */
+/*   Updated: 2018/08/14 18:56:39 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,5 +150,9 @@ char	*flags_octal(char *str, int size, t_flags data);
 char	*flags_string(char *str, int size, t_flags data);
 char	*flags_unsigned(char *str, int size, t_flags data);
 char	*flags_address(char *str, int size, t_flags data);
+
+char	*negative_number(char *begin, char *end, int size_begin);
+char	*precision(char *str, int size, t_flags data);
+char	*space(char *str, int size, t_flags data);
 
 #endif

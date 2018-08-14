@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   s.c                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adibou <adibou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/10 12:40:17 by adibou            #+#    #+#             */
-/*   Updated: 2018/08/13 02:15:44 by adibou           ###   ########.fr       */
+/*   Updated: 2018/08/14 19:03:27 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "ft_printf.h"
 
-static char	*precision(char *str, int size, t_flags data)
+static char	*precision_s(char *str, int size, t_flags data)
 {
 	char *tmp;
 
@@ -25,7 +25,7 @@ static char	*precision(char *str, int size, t_flags data)
 	free(str);
 	return (tmp);
 }
-#include <stdio.h>
+
 char	*flags_string(char *str, int size, t_flags data)
 {
 	char *back;
@@ -35,7 +35,7 @@ char	*flags_string(char *str, int size, t_flags data)
 	if (data.forme & ZERO && data.forme & MINUS)
 		data.forme -= ZERO;
 	if (data.forme & DOT)
-		str = precision(str, size, data);
+		str = precision_s(str, size, data);
 	if (data.space <= (size = ft_strlen(str)))
 		return (str);
 	if (data.forme & ZERO)

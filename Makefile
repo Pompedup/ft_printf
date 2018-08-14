@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adibou <adibou@student.42.fr>              +#+  +:+       +#+         #
+#    By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/03 18:57:57 by abezanni          #+#    #+#              #
-#    Updated: 2018/08/14 01:43:22 by adibou           ###   ########.fr        #
+#    Updated: 2018/08/14 18:59:28 by abezanni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC_NAME =	ft_annexes.c\
 			s.c\
 			u.c\
 			x.c\
+			fonctions_communes.c\
 
 SRC = $(addprefix src/,$(SRC_NAME))
 
