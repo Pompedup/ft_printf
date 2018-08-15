@@ -6,15 +6,16 @@
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:36:53 by adibou            #+#    #+#             */
-/*   Updated: 2018/08/14 18:56:52 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/15 14:54:09 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Pas de + &&  ' '
-// . && # && Espaces && 0 && - (- prio)
+/*
+** Pas de + &&  ' '
+** . && # && Espaces && 0 && - (- prio)
+*/
 
 #include "ft_printf.h"
-
 
 static char	*hash(char *str, t_flags data, char c)
 {
@@ -23,7 +24,7 @@ static char	*hash(char *str, t_flags data, char c)
 	return (ft_strmjoin(c == 'x' ? "0x" : "0X", str, 2));
 }
 
-char	*flags_hexa(char *str, int size, t_flags data, char c)
+char		*flags_hexa(char *str, int size, t_flags data, char c)
 {
 	if (data.forme & ZERO && (data.forme & DOT || data.forme & MINUS))
 		data.forme -= ZERO;

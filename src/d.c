@@ -6,12 +6,14 @@
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:36:53 by adibou            #+#    #+#             */
-/*   Updated: 2018/08/14 19:44:32 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/15 16:41:08 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Pas de #
-// ' ' && . && + && Espaces && 0 && - (- prio)
+/*
+** Pas de #
+** ' ' && . && + && Espaces && 0 && - (- prio)
+*/
 
 #include "ft_printf.h"
 
@@ -46,17 +48,17 @@ static char	*signe(char *str, int size, t_flags data)
 
 static char	*space_d(char *str, int size, t_flags data)
 {
-	char *tmp;
+	char	*tmp;
+	int		signe;
 
-	//data.space - size - ((data.forme & PLUS || data.forme & SPACE) && !(data.forme & DOT || data.forme & ZERO))
-
+	signe = 0;
 	if (*str != '-' && !(data.forme & DOT || data.forme & ZERO))
-	(data.forme & PLUS || data.forme & SPACE)
-	if (data.space <= size || data.space <= size + BORDEL)
+		signe = data.forme & PLUS || data.forme & SPACE;
+	if (data.space <= size + signe)
 		return (str);
 	if (data.forme & ZERO)
 	{
-		tmp = ft_strnewset('0', data.space - size/* - ((data.forme & PLUS || data.forme & SPACE) && *str != '-' && !(data.forme & DOT || data.forme & ZERO))*/);
+		tmp = ft_strnewset('0', data.space - size);
 		if (*str == '-')
 			str = negative_number(tmp, str, ft_strlen(tmp));
 		else
@@ -67,11 +69,13 @@ static char	*space_d(char *str, int size, t_flags data)
 		tmp = ft_strnewset(' ', data.space - size);
 	if (!tmp)
 		return (NULL);
-	return (data.forme & MINUS ? ft_strmjoin(str, tmp, 3) : ft_strmjoin(tmp, str, 3));
+	return (data.forme & MINUS ? ft_strmjoin(str, tmp, 3)
+		: ft_strmjoin(tmp, str, 3));
 }
 
-char	*flags_decimal(char *str, int size, t_flags data)
+char		*flags_decimal(char *str, int size, t_flags data, char c)
 {
+	(void)c;
 	if (data.forme & ZERO && (data.forme & DOT || data.forme & MINUS))
 		data.forme -= ZERO;
 	if (*str == '0' && data.forme & DOT && data.precision == 0)

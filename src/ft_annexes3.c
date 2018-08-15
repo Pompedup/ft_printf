@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_annexes3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adibou <adibou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/07 16:59:34 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/13 01:38:38 by adibou           ###   ########.fr       */
+/*   Updated: 2018/08/15 15:08:09 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ char	*ft_mins(t_printf *dt, char c)
 
 char	*ft_majs(t_printf *dt, char c)
 {
-	char	*tmp;
-	char	*back;
+	char		*tmp;
+	char		*back;
 	wchar_t		*tab;
-	int		i;
+	int			i;
 
 	(void)c;
 	tab = va_arg(dt->ap, wchar_t*);

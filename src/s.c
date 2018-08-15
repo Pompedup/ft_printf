@@ -6,12 +6,14 @@
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/10 12:40:17 by adibou            #+#    #+#             */
-/*   Updated: 2018/08/14 19:03:27 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/15 13:38:57 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Pas de + #
-// . && Espaces && 0 && - (- prio)
+/*
+** Pas de + #
+** . && Espaces && 0 && - (- prio)
+*/
 
 #include "ft_printf.h"
 
@@ -26,10 +28,11 @@ static char	*precision_s(char *str, int size, t_flags data)
 	return (tmp);
 }
 
-char	*flags_string(char *str, int size, t_flags data)
+char		*flags_string(char *str, int size, t_flags data, char c)
 {
 	char *back;
 
+	(void)c;
 	if (str == NULL)
 		str = ft_strdup("");
 	if (data.forme & ZERO && data.forme & MINUS)

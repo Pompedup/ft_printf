@@ -6,7 +6,7 @@
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 18:46:35 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/14 18:56:43 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/15 13:01:51 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ char	*negative_number(char *begin, char *end, int size_begin)
 	return (back);
 }
 
-//p && x && o && u
+/*
+**p && x && o && u
+*/
 
 char	*precision(char *str, int size, t_flags data)
 {
@@ -40,7 +42,9 @@ char	*precision(char *str, int size, t_flags data)
 	return (str);
 }
 
-//o && u && x
+/*
+**o && u && x
+*/
 
 char	*space(char *str, int size, t_flags data)
 {

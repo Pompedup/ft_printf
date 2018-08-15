@@ -3,77 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   ft_present_flag.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adibou <adibou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:30:21 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/14 01:36:05 by adibou           ###   ########.fr       */
+/*   Updated: 2018/08/15 16:57:10 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-//sSpbDiOuUC%
-//sSb
-
-int		ft_nochar(t_printf *dt)
+static int	ft_apply_flag(t_printf *dt, t_flags data, int size)
 {
-	int back;
+	static t_ft_applyflags	tab_ft[] = {
+		{"idD", flags_decimal},
+		{"uU", flags_unsigned},
+		{"xX", flags_hexa},
+		{"p", flags_address},
+		{"oO", flags_octal},
+		{"sS", flags_string},
+		{NULL, NULL},
+	};
+	t_ft_applyflags			*ptr;
 
-	back = 0;
-	if (dt->str[dt->pos_s])
+	ptr = tab_ft;
+	if (dt->str[dt->pos_s - 1] == 'S')
+		data.convert = 4;
+	while (ptr->str)
 	{
-		if (!(dt->tmp = (char *)malloc(2)))
-			return (0);
-		dt->tmp[0] = dt->str[dt->pos_s++];
-		dt->tmp[1] = 0;
-		back = 1;
+		if (ft_strchr(ptr->str, dt->str[dt->pos_s - 1]))
+			dt->tmp = ptr->fct(dt->tmp, size, data, dt->str[dt->pos_s - 1]);
+		ptr++;
 	}
-	else
-		dt->tmp = ft_strdup("");
-	return (back);
+	if (!ft_strchr("idDuUxXpoOsS", dt->str[dt->pos_s - 1]))
+		dt->tmp = flags_char(dt->tmp, size, data, dt->str[dt->pos_s - 1]);
+	return (ft_strlen(dt->tmp));
 }
 
-static int	ft_apply_flag(t_printf *dt, t_flags data)
+static int	ft_test(t_printf *dt, t_flags data)
 {
-	//char	*tmp;
 	int		size;
 
-	if ((data.convert && ft_strchr("bdiouxXcs", dt->str[dt->pos_s])) ||
-		((dt->str[dt->pos_s] == 'S' || (dt->str[dt->pos_s] == 's'
-		&& data.convert == 4)) && data.precision))
+	if ((data.convert && ft_strchr("bdiouxXcsS", dt->str[dt->pos_s]))
+		|| (ft_strchr("sS", dt->str[dt->pos_s]) && data.forme & DOT))
 		size = ft_value_flag_conv(dt, data);
 	else
 	{
-		if (!dt->str[dt->pos_s] ||
-			!(ft_strchr(CONV, dt->str[dt->pos_s])))
-			size = ft_nochar(dt);
+		if (!dt->str[dt->pos_s] || !(ft_strchr(CONV, dt->str[dt->pos_s])))
+		{
+			dt->tmp = ft_strnewset(dt->str[dt->pos_s], 1);
+			if (dt->str[dt->pos_s])
+				dt->pos_s++;
+			size = !(*(dt->tmp)) ? 0 : 1;
+		}
 		else
 			size = ft_value_flag(dt);
 	}
-	if (ft_strchr("%cC", dt->str[dt->pos_s - 1]) || !ft_strchr("%idDuUxXpoOsS", dt->str[dt->pos_s - 1]))
+	if (*(dt->tmp) == 0 && ft_strchr("%cC", dt->str[dt->pos_s - 1]))
 	{
-		if (*(dt->tmp) == 0 && ft_strchr("%cC", dt->str[dt->pos_s - 1]))
-		{
-			dt->tmp = flags_char(dt->tmp, size, data, dt->str[dt->pos_s - 1]);
-			if (data.space)
-				return (data.space);
-			return (1);
-		}
 		dt->tmp = flags_char(dt->tmp, size, data, dt->str[dt->pos_s - 1]);
+		if (data.space)
+			return (data.space);
+		return (1);
 	}
-	if (ft_strchr("idD", dt->str[dt->pos_s - 1]))
-		dt->tmp = flags_decimal(dt->tmp, size, data);
-	if (ft_strchr("uU", dt->str[dt->pos_s - 1]))
-		dt->tmp = flags_unsigned(dt->tmp, size, data);
-	if (ft_strchr("xX", dt->str[dt->pos_s - 1]))
-		dt->tmp = flags_hexa(dt->tmp, size, data, dt->str[dt->pos_s - 1]);
-	if (ft_strchr("p", dt->str[dt->pos_s - 1]))
-		dt->tmp = flags_address(dt->tmp, size, data);
-	if (ft_strchr("oO", dt->str[dt->pos_s - 1]))
-		dt->tmp = flags_octal(dt->tmp, size, data);
-	if (ft_strchr("sS", dt->str[dt->pos_s - 1]))
-		dt->tmp = flags_string(dt->tmp, size, data);
-	return (ft_strlen(dt->tmp));
+	return (ft_apply_flag(dt, data, size));
 }
 
 /*
@@ -143,5 +135,5 @@ int			ft_present_flag(t_printf *dt)
 			dt->pos_s += ft_nbr_len(data.space);
 		}
 	}
-	return (ft_apply_flag(dt, data));
+	return (ft_test(dt, data));
 }

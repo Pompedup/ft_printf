@@ -6,7 +6,7 @@
 #    By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/03 18:57:57 by abezanni          #+#    #+#              #
-#    Updated: 2018/08/14 18:59:28 by abezanni         ###   ########.fr        #
+#    Updated: 2018/08/15 15:54:08 by abezanni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ LIB_PATH = libft
 
 LIB = libft/libft.a
 
-INCLUDE = -I ./includes
+INCLUDE = -I ./inc
 
 CFLAGS = -Wall -Wextra -Werror $(INCLUDE)
 

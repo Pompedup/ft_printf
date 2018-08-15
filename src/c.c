@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   c.c                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adibou <adibou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:36:53 by adibou            #+#    #+#             */
-/*   Updated: 2018/08/12 10:22:01 by adibou           ###   ########.fr       */
+/*   Updated: 2018/08/15 15:05:55 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Pas de . + #
-// Espaces && 0 && - (- prio)
+/*
+** Pas de . + #
+** Espaces && 0 && - (- prio)
+*/
 
 #include "ft_printf.h"
 
@@ -40,5 +42,6 @@ char	*flags_char(char *str, int size, t_flags data, char c)
 		back = ft_strnewset(' ', data.space - size);
 	if (!back)
 		return (NULL);
-	return (data.forme & 8 ? ft_strmjoin(str, back, 3) : ft_strmjoin(back, str, 3));
+	return (data.forme & 8 ? ft_strmjoin(str, back, 3)
+		: ft_strmjoin(back, str, 3));
 }
