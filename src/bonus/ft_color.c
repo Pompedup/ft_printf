@@ -6,13 +6,13 @@
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 18:08:49 by abezanni          #+#    #+#             */
-/*   Updated: 2018/02/14 17:41:00 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/16 14:27:23 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_color(t_printf *dt)
+int		color(t_printf *dt)
 {
 	static t_color	src_clr[] = {
 		{"black}", "30m"}, {"red}", "31m"}, {"green}", "32m"},
@@ -37,7 +37,7 @@ int		ft_color(t_printf *dt)
 	return (1);
 }
 
-int		ft_color_back(t_printf *dt)
+int		color_back(t_printf *dt)
 {
 	static t_color	src_clr[] = {
 		{"black]", "40m"}, {"red]", "41m"}, {"green]", "42m"},
@@ -60,18 +60,4 @@ int		ft_color_back(t_printf *dt)
 	}
 	dt->tmp = ft_strdup("[");
 	return (1);
-}
-
-void	ft_free_tmp(void **first, void **second)
-{
-	if (first && *first)
-	{
-		free(*first);
-		*first = NULL;
-	}
-	if (second && *second)
-	{
-		free(*second);
-		*second = NULL;
-	}
 }

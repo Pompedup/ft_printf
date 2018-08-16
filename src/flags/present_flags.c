@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_present_flag.c                                  :+:      :+:    :+:   */
+/*   present_flags.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:30:21 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/15 16:57:10 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/16 17:59:55 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_apply_flag(t_printf *dt, t_flags data, int size)
+static int	apply_flag(t_printf *dt, t_flags data, int size)
 {
-	static t_ft_applyflags	tab_ft[] = {
+	static t_applyflags	tab_ft[] = {
 		{"idD", flags_decimal},
 		{"uU", flags_unsigned},
 		{"xX", flags_hexa},
@@ -23,7 +23,7 @@ static int	ft_apply_flag(t_printf *dt, t_flags data, int size)
 		{"sS", flags_string},
 		{NULL, NULL},
 	};
-	t_ft_applyflags			*ptr;
+	t_applyflags		*ptr;
 
 	ptr = tab_ft;
 	if (dt->str[dt->pos_s - 1] == 'S')
@@ -39,13 +39,13 @@ static int	ft_apply_flag(t_printf *dt, t_flags data, int size)
 	return (ft_strlen(dt->tmp));
 }
 
-static int	ft_test(t_printf *dt, t_flags data)
+static int	get_str(t_printf *dt, t_flags data)
 {
 	int		size;
 
 	if ((data.convert && ft_strchr("bdiouxXcsS", dt->str[dt->pos_s]))
 		|| (ft_strchr("sS", dt->str[dt->pos_s]) && data.forme & DOT))
-		size = ft_value_flag_conv(dt, data);
+		size = value_flag_conv(dt, data);
 	else
 	{
 		if (!dt->str[dt->pos_s] || !(ft_strchr(CONV, dt->str[dt->pos_s])))
@@ -56,8 +56,10 @@ static int	ft_test(t_printf *dt, t_flags data)
 			size = !(*(dt->tmp)) ? 0 : 1;
 		}
 		else
-			size = ft_value_flag(dt);
+			size = value_flag(dt);
 	}
+	if (!dt->tmp)
+		return (0);
 	if (*(dt->tmp) == 0 && ft_strchr("%cC", dt->str[dt->pos_s - 1]))
 	{
 		dt->tmp = flags_char(dt->tmp, size, data, dt->str[dt->pos_s - 1]);
@@ -65,14 +67,14 @@ static int	ft_test(t_printf *dt, t_flags data)
 			return (data.space);
 		return (1);
 	}
-	return (ft_apply_flag(dt, data, size));
+	return (apply_flag(dt, data, size));
 }
 
 /*
 ** A retoucher apres ??
 */
 
-static char	ft_what_type(t_printf *dt, unsigned char m, int type)
+static char	what_type(t_printf *dt, unsigned char m, int type)
 {
 	if (type < 6)
 	{
@@ -100,13 +102,13 @@ static char	ft_what_type(t_printf *dt, unsigned char m, int type)
 	return (m);
 }
 
-static void	ft_manage_flag(t_printf *dt, t_flags *data, int type)
+static void	manage_flag(t_printf *dt, t_flags *data, int type)
 {
 	dt->pos_s++;
 	if (type > 5)
-		data->convert = ft_what_type(dt, data->convert, type);
+		data->convert = what_type(dt, data->convert, type);
 	else
-		data->forme = ft_what_type(dt, data->forme, type);
+		data->forme = what_type(dt, data->forme, type);
 	if (type == 0)
 	{
 		data->precision = ft_atoi(dt->str + dt->pos_s);
@@ -115,7 +117,7 @@ static void	ft_manage_flag(t_printf *dt, t_flags *data, int type)
 	}
 }
 
-int			ft_present_flag(t_printf *dt)
+int			present_flag(t_printf *dt)
 {
 	t_flags	data;
 	char	*tmp;
@@ -128,12 +130,12 @@ int			ft_present_flag(t_printf *dt)
 		|| ft_isdigit(dt->str[dt->pos_s]))
 	{
 		if (tmp)
-			ft_manage_flag(dt, &data, tmp - FLAG);
+			manage_flag(dt, &data, tmp - FLAG);
 		else
 		{
 			data.space = ft_atoi(dt->str + dt->pos_s);
 			dt->pos_s += ft_nbr_len(data.space);
 		}
 	}
-	return (ft_test(dt, data));
+	return (get_str(dt, data));
 }

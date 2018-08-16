@@ -1,21 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_annexes4.c                                      :+:      :+:    :+:   */
+/*   convert.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/07 16:59:58 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/15 15:14:35 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/16 14:58:42 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-**	char	*ft_binary(t_printf *dt, char c);
-**	char		*ft_percent(t_printf *dt, char c);
-**	char		*ft_conv_int(t_printf *dt, char c, unsigned char conv);
-**	char		*ft_conv_other(t_printf *dt, char c, unsigned char conv);
-*/
 
 #include "ft_printf.h"
 
@@ -23,7 +16,7 @@
 ** Gestion des %d %i avec conversion.
 */
 
-char	*ft_conv_int(t_printf *dt, char c, unsigned char conv)
+char	*conv_i_d(t_printf *dt, char c, unsigned char conv)
 {
 	long long			var;
 
@@ -48,7 +41,7 @@ char	*ft_conv_int(t_printf *dt, char c, unsigned char conv)
 ** Gestion des %o %u %x %X avec conversion.
 */
 
-char	*ft_conv_other(t_printf *dt, char c, unsigned char conv)
+char	*conv_b_o_u_x_ux(t_printf *dt, char c, unsigned char conv)
 {
 	unsigned long long	var;
 	int					base;
@@ -77,12 +70,12 @@ char	*ft_conv_other(t_printf *dt, char c, unsigned char conv)
 	return (ft_ulltoa_base(var, base, c == 'X'));
 }
 
-char	*ft_conv_c(t_printf *dt, char c, unsigned char conv)
+char	*conv_c_uc(t_printf *dt, char c, unsigned char conv)
 {
-	return (conv & 4 ? ft_majc(dt, c) : ft_minc(dt, c));
+	return (conv & 4 ? type_uc(dt, c) : type_c(dt, c));
 }
 
-char	*ft_conv_s(t_printf *dt, char c, unsigned char conv)
+char	*conv_s_us(t_printf *dt, char c, unsigned char conv)
 {
-	return (conv & 4 ? ft_majs(dt, c) : ft_mins(dt, c));
+	return (conv & 4 ? type_us(dt, c) : type_s(dt, c));
 }

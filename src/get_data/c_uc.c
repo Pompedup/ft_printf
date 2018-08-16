@@ -1,38 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_annexes.c                                       :+:      :+:    :+:   */
+/*   c_uc.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adibou <adibou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 13:35:14 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/13 00:54:07 by adibou           ###   ########.fr       */
+/*   Updated: 2018/08/16 18:42:13 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** char		*ft_adress(t_printf *dt, char c);
-** char		*ft_wctoa(int c);
-*/
-
 #include "ft_printf.h"
-
-/*
-** Gestion des %p.
-*/
-
-char			*ft_adress(t_printf *dt, char c)
-{
-	(void)c;
-	return (ft_strmjoin("0x", ft_ulltoa_base(
-		(unsigned long long)va_arg(dt->ap, void *), 16, 0), 2));
-}
 
 /*
 **	Initialise le tableau des unicodes
 */
 
-static void		ft_create_tab(unsigned char *str, int size)
+static void	create_tab(unsigned char *str, int size)
 {
 	int j;
 	int i;
@@ -57,13 +41,13 @@ static void		ft_create_tab(unsigned char *str, int size)
 **	Rempli les valeurs dans le tableau
 */
 
-static void		ft_sort_char(unsigned char *back, int c, int size)
+static void	sort_char(unsigned char *back, int c, int size)
 {
 	int				i;
 	int				j;
 
 	back[size] = 0;
-	ft_create_tab(back, size);
+	create_tab(back, size);
 	i = 1;
 	j = 0;
 	i = 0;
@@ -81,13 +65,19 @@ static void		ft_sort_char(unsigned char *back, int c, int size)
 **	Gestion des unicodes
 */
 
-char			*ft_wctoa(wchar_t c)
+char		*wctoa(wchar_t c)
 {
 	char			*back;
 	unsigned int	bin;
 	int				i;
 	int				size;
 
+	if (MB_CUR_MAX == 1 && !(0 <= c && c <= 255))
+		return (NULL);
+	if ((0xD800 <= c && c <= 0xDFFF) || c > 0x10FFFF || c < 0)
+		return (NULL);
+	if (MB_CUR_MAX == 1)
+		return (ft_strdup((char *)&c));
 	i = 0;
 	bin = 2147483648;
 	i = 32;
@@ -105,7 +95,31 @@ char			*ft_wctoa(wchar_t c)
 		size = (i - 2) / 5 + 1;
 		if (!(back = (char *)malloc(size + 1)))
 			return (NULL);
-		ft_sort_char((unsigned char*)back, c, size);
+		sort_char((unsigned char*)back, c, size);
 	}
 	return (back);
+}
+
+/*
+** Gestion des caractères unicode.
+*/
+
+char		*type_uc(t_printf *dt, char c)
+{
+	(void)c;
+	return (wctoa(va_arg(dt->ap, wchar_t)));
+}
+
+/*
+** Gestion des caractères simple.
+*/
+
+char		*type_c(t_printf *dt, char c)
+{
+	char	back[2];
+
+	(void)c;
+	back[0] = (char)va_arg(dt->ap, int);
+	back[1] = 0;
+	return (ft_strdup(back));
 }

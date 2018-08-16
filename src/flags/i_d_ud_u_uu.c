@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   d.c                                                :+:      :+:    :+:   */
+/*   i_d_ud_u_uu.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:36:53 by adibou            #+#    #+#             */
-/*   Updated: 2018/08/15 16:41:08 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/16 14:31:36 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,20 @@ char		*flags_decimal(char *str, int size, t_flags data, char c)
 		str = signe(str, ft_strlen(str), data);
 	str = space_d(str, ft_strlen(str), data);
 	str = signe(str, ft_strlen(str), data);
+	return (str);
+}
+
+char		*flags_unsigned(char *str, int size, t_flags data, char c)
+{
+	(void)c;
+	if (data.forme & ZERO && (data.forme & DOT || data.forme & MINUS))
+		data.forme -= ZERO;
+	if (*str == '0' && data.forme & DOT && data.precision == 0)
+	{
+		free(str);
+		str = ft_strdup("");
+	}
+	str = precision(str, size, data);
+	str = space(str, ft_strlen(str), data);
 	return (str);
 }

@@ -6,33 +6,40 @@
 #    By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/03 18:57:57 by abezanni          #+#    #+#              #
-#    Updated: 2018/08/15 15:54:08 by abezanni         ###   ########.fr        #
+#    Updated: 2018/08/16 14:33:54 by abezanni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-OBJ = $(SRC:.c=.o)
+BONUS =		ft_color.c\
 
-CC = @gcc
+FLAGS =		c_uc_s_us.c\
+			i_d_ud_u_uu.c\
+			mutual_change.c\
+			o_uo.c\
+			p_x_ux.c\
+			present_flags.c\
 
-SRC_NAME =	ft_annexes.c\
-			ft_annexes2.c\
-			ft_annexes3.c\
-			ft_annexes4.c\
-			ft_annexes5.c\
-			ft_color.c\
-			ft_present_flag.c\
-			ft_printf.c\
-			ft_value_flag.c\
-			c.c\
-			d.c\
-			o.c\
+GET_DATA =	b_percent.c\
+			c_uc.c\
+			convert.c\
+			i_d_ud_o_uo_u_uu_x_ux.c\
 			p.c\
-			s.c\
-			u.c\
-			x.c\
-			fonctions_communes.c\
+			s_us.c\
+			value_flag.c\
+
+GET_LST =	get_lst.c\
+
+SRC_NAME =	ft_printf.c\
+			$(addprefix bonus/,$(BONUS))\
+			$(addprefix flags/,$(FLAGS))\
+			$(addprefix get_data/,$(GET_DATA))\
+			$(addprefix get_lst/,$(GET_LST))\
 
 SRC = $(addprefix src/,$(SRC_NAME))
+
+OBJ = $(SRC:.c=.o)
+
+INC = -I ./inc
 
 NAME = libftprintf.a
 
@@ -40,15 +47,18 @@ LIB_PATH = libft
 
 LIB = libft/libft.a
 
-INCLUDE = -I ./inc
+CC = @gcc
 
-CFLAGS = -Wall -Wextra -Werror $(INCLUDE)
+CFLAGS = -Wall -Wextra -Werror $(INC)
 
-all : $(NAME)
 
-$(NAME) : libftcomp $(LIB) $(OBJ)
+all : libftcomp $(NAME)
+
+$(NAME) : $(LIB) $(OBJ)
 	@libtool -static -o $@ $(LIB) $(OBJ)
 	@echo "\033[1;32mSucced libftprintf.a\033[0m"
+
+$(OBJ) : inc/ft_printf.h
 
 libftcomp :
 	@make -C $(LIB_PATH)
