@@ -6,7 +6,7 @@
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:38:10 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/16 18:32:44 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/16 18:57:36 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int			ft_printf(char *format, ...)
 	concatenate(&dt, lst);
 	write(1, dt.str, dt.tot);
 	free(dt.str);
-	if (dt.error == -1)
-		return (dt.error);
 	return (dt.tot);
 }
 
@@ -39,8 +37,6 @@ int			ft_fprintf(int fd, char *format, ...)
 	concatenate(&dt, lst);
 	write(fd, dt.str, dt.tot);
 	free(dt.str);
-	if (dt.error == -1)
-		return (dt.error);
 	return (dt.tot);
 }
 

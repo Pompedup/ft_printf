@@ -6,7 +6,7 @@
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 16:30:21 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/16 17:59:55 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/16 18:52:50 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ static int	get_str(t_printf *dt, t_flags data)
 		else
 			size = value_flag(dt);
 	}
-	if (!dt->tmp)
-		return (0);
 	if (*(dt->tmp) == 0 && ft_strchr("%cC", dt->str[dt->pos_s - 1]))
 	{
 		dt->tmp = flags_char(dt->tmp, size, data, dt->str[dt->pos_s - 1]);

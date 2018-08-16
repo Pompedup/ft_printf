@@ -6,7 +6,7 @@
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:38:37 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/16 18:15:45 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/16 18:57:22 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct	s_printf
 	int			pos_s;
 	char		*tmp;
 	int			tot;
-	int			error;
 	va_list		ap;
 }				t_printf;
 

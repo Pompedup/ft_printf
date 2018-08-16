@@ -6,7 +6,7 @@
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 13:35:14 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/16 18:42:13 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/16 18:59:12 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,6 @@ char		*wctoa(wchar_t c)
 	int				i;
 	int				size;
 
-	if (MB_CUR_MAX == 1 && !(0 <= c && c <= 255))
-		return (NULL);
-	if ((0xD800 <= c && c <= 0xDFFF) || c > 0x10FFFF || c < 0)
-		return (NULL);
-	if (MB_CUR_MAX == 1)
-		return (ft_strdup((char *)&c));
 	i = 0;
 	bin = 2147483648;
 	i = 32;
