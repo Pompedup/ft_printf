@@ -6,7 +6,7 @@
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:38:10 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/16 18:57:36 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/17 16:37:52 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			ft_printf(char *format, ...)
 	free(dt.str);
 	return (dt.tot);
 }
-
+/*
 int			ft_fprintf(int fd, char *format, ...)
 {
 	static t_printf	dt;
@@ -52,3 +52,4 @@ int			ft_sprintf(char **str, char *format, ...)
 	*str = dt.str;
 	return (dt.tot);
 }
+*/

@@ -6,7 +6,7 @@
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:38:37 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/16 18:57:22 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/17 16:39:39 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@
 
 typedef struct	s_printf
 {
-	char		*buf;
+	char		buf[1000];
+	char		*format;
 	char		*str;
 	int			pos_s;
+	int			size_to_print;
 	char		*tmp;
 	int			tot;
 	va_list		ap;
@@ -246,7 +248,7 @@ void			ft_init(t_printf *dt, char *str, t_list **lst);
 */
 
 int				ft_printf(char *str, ...);
-int				ft_fprintf(int fd, char *format, ...);
-int				ft_sprintf(char **str, char *format, ...);
+//int				ft_fprintf(int fd, char *format, ...);
+//int				ft_sprintf(char **str, char *format, ...);
 
 #endif
