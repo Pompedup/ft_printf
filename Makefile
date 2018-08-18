@@ -6,33 +6,18 @@
 #    By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/03 18:57:57 by abezanni          #+#    #+#              #
-#    Updated: 2018/08/17 16:14:36 by abezanni         ###   ########.fr        #
+#    Updated: 2018/08/18 18:18:30 by abezanni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-BONUS =		ft_color.c\
-
-FLAGS =		c_uc_s_us.c\
-			i_d_ud_u_uu.c\
-			mutual_change.c\
-			o_uo.c\
-			p_x_ux.c\
-			present_flags.c\
-
-GET_DATA =	b_percent.c\
-			c_uc.c\
-			convert.c\
-			i_d_ud_o_uo_u_uu_x_ux.c\
-			p.c\
-			s_us.c\
-			value_flag.c\
-
-GET_LST =	get_lst.c\
-
 SRC_NAME =	ft_printf.c\
+			get_flags.c\
+			get_strings.c\
+			process_format.c\
+			bordel.c\
+			#$(addprefix bonus/,$(BONUS))\
 			$(addprefix get_data/,$(GET_DATA))\
 			$(addprefix get_lst/,$(GET_LST))\
-			#$(addprefix bonus/,$(BONUS))\
 			$(addprefix flags/,$(FLAGS))\
 
 SRC = $(addprefix src/,$(SRC_NAME))

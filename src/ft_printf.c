@@ -6,11 +6,20 @@
 /*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:38:10 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/17 16:37:52 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/18 17:26:50 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void		ft_init(t_printf *dt, char *str, char option)
+{
+	dt->format = str;
+	dt->buf_move = dt->buf;
+	dt->less = BUFF_SIZE;
+	dt->back = 0;
+	dt->option = option;
+}
 
 int			ft_printf(char *format, ...)
 {
@@ -18,7 +27,8 @@ int			ft_printf(char *format, ...)
 
 	ft_init(&dt, format, FT_PRINTF);
 	va_start(dt.ap, format);
-	get_lst(&dt);
+	process_format(&dt);
+	write(1, dt.buf, BUFF_PRF - dt.less);
 	return (dt.back);
 }
 
