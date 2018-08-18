@@ -16,43 +16,57 @@
 ** Gestion des chaines de caractères simple.
 */
 
-char	*type_s(t_printf *dt, char c)
+int	type_s(t_printf *dt, char c)
 {
-	char *tmp;
+	char	*tmp;
+	int		size;
 
 	(void)c;
 	tmp = va_arg(dt->ap, char*);
-	return (tmp ? ft_strdup(tmp) : ft_strdup("(null)"));
+	if (!tmp)
+	{
+		ft_strcpy(dt->buf_move, "(null)");
+		size = 6;
+	}
+	else
+	{
+		ft_strcpy(dt->buf_move, tmp);
+		size = ft_strlen(tmp);
+	}
+	dt->buf_move += size;
+	dt->to_print += size;
+	return (size);
 }
 
 /*
 ** Gestion des chaines de caractères unicode.
 */
 
-char	*type_us(t_printf *dt, char c)
+int	type_us(t_printf *dt, char c)
 {
-	char		*tmp;
-	char		*back;
-	wchar_t		*tab;
-	int			i;
+	char			tmp[10];
+	wchar_t			*tab;
+	int				i;
+	int				size;
+	int				max;
 
-	(void)c;
 	tab = va_arg(dt->ap, wchar_t*);
+	size = 0;
+	max = c;
 	if (!tab)
-		return (ft_strdup("(null)"));
-	else if (!tab[0])
-		return (ft_strdup(""));
-	back = ft_strdup("");
-	i = -1;
-	while (tab[++i] != 0)
 	{
-		tmp = wctoa(tab[i]);
-		if (c && (ft_strlen(tmp) + ft_strlen(back) > (unsigned long)c))
-		{
-			free(tmp);
-			return (back);
-		}
-		back = ft_strmjoin(back, tmp, 3);
+		ft_strcpy(dt->buf_move, "(null)");
+		size = 6;
 	}
-	return (back);
+	i = -1;
+	while (tab && tab[++i] != 0)
+	{
+		size += wctoa(tmp, tab[i]);
+		if (max && size > max)
+			return (size - ft_strlen(tmp));
+		ft_strcpy(dt->buf_move, tmp);
+		dt->buf_move += ft_strlen(tmp);
+		dt->to_print += ft_strlen(tmp);
+	}
+	return (size);
 }

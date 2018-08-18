@@ -15,23 +15,20 @@
 int			ft_printf(char *format, ...)
 {
 	static t_printf	dt;
-	t_list			*lst;
 
-	ft_init(&dt, format, &lst);
+	ft_init(&dt, format, FT_PRINTF);
 	va_start(dt.ap, format);
-	get_lst(&dt, &lst);
-	concatenate(&dt, lst);
-	write(1, dt.str, dt.tot);
-	free(dt.str);
-	return (dt.tot);
+	get_lst(&dt);
+	return (dt.back);
 }
 
+
+/*
 int			ft_fprintf(int fd, char *format, ...)
 {
 	static t_printf	dt;
-	t_list			*lst;
 
-	ft_init(&dt, format, &lst);
+	ft_init(&dt, format, FT_FPRINTF);
 	va_start(dt.ap, format);
 	get_lst(&dt, &lst);
 	concatenate(&dt, lst);
@@ -43,12 +40,12 @@ int			ft_fprintf(int fd, char *format, ...)
 int			ft_sprintf(char **str, char *format, ...)
 {
 	static t_printf	dt;
-	t_list			*lst;
 
-	ft_init(&dt, format, &lst);
+	ft_init(&dt, format, FT_SPRINTF);
 	va_start(dt.ap, format);
 	get_lst(&dt, &lst);
 	concatenate(&dt, lst);
 	*str = dt.str;
 	return (dt.tot);
 }
+*/

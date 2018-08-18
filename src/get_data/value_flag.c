@@ -25,14 +25,11 @@ int	value_flag(t_printf *dt)
 	ptr = tab_func;
 	while (ptr->str)
 	{
-		if (ft_strchr(ptr->str, dt->str[dt->pos_s]))
+		if (ft_strchr(ptr->str, *dt->format))
 		{
-			dt->pos_s++;
-			dt->tmp = ptr->fct(dt, dt->str[dt->pos_s - 1] == 'S' ? 0 :
-				dt->str[dt->pos_s - 1]);
-			if (!(*dt->tmp) && ft_strchr("cC", dt->str[dt->pos_s - 1]))
-				return (1);
-			return (ft_strlen(dt->tmp));
+			dt->format++;
+			return (ptr->fct(dt, *(dt->format - 1) == 'S' ? 0 :
+				*(dt->format - 1)));
 		}
 		ptr++;
 	}
@@ -51,16 +48,15 @@ int	value_flag_conv(t_printf *dt, t_flags data)
 	t_conv			*ptr;
 
 	ptr = tab_func;
-	if (dt->str[dt->pos_s] == 'S')
+	if (*dt->format == 'S')
 		data.convert = 4;
 	while (ptr->str)
 	{
-		if (ft_strchr(ptr->str, dt->str[dt->pos_s]))
+		if (ft_strchr(ptr->str, *dt->format))
 		{
-			dt->pos_s++;
-			dt->tmp = ptr->fct(dt, ft_strchr("sS", dt->str[dt->pos_s - 1])
-				? data.precision : dt->str[dt->pos_s - 1], data.convert);
-			return (ft_strlen(dt->tmp));
+			dt->format++;
+			return (ptr->fct(dt, ft_strchr("sS", *(dt->format - 1))
+				? data.precision : *(dt->format - 1), data.convert));
 		}
 		ptr++;
 	}

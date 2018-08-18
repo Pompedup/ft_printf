@@ -14,43 +14,36 @@
 
 static int	verif_char(t_printf *dt)
 {
-	dt->pos_s++;
-	if (dt->str[dt->pos_s - 1] == '{')
+	dt->format++;
+	if (*(dt->format - 1) == '{')
 		return (color(dt));
-	else if (dt->str[dt->pos_s - 1] == '[')
+	else if (*(dt->format - 1) == '[')
 		return (color_back(dt));
-	else if (ft_strchr(CONV, dt->str[dt->pos_s]) != NULL)
+	else if (ft_strchr(CONV, *dt->format) != NULL)
 		return (value_flag(dt));
-	else if (ft_strchr(FLAG, dt->str[dt->pos_s]) != NULL
-		|| ft_isdigit(dt->str[dt->pos_s]))
+	else if (ft_strchr(FLAG, *dt->format) != NULL
+		|| ft_isdigit(*dt->format))
 		return (present_flag(dt));
-	dt->tmp = (char*)malloc(1);
 	return (0);
 }
 
-void		get_lst(t_printf *dt, t_list **lst)
+void		get_lst(t_printf *dt)
 {
-	char	buf[100];
-	int		size;
-
-	while (dt->str[dt->pos_s])
+	while (*dt->format)
 	{
-		size = 0;
-		if (!ft_strchr("%{[", dt->str[dt->pos_s]))
+		if (!ft_strchr("%{[", *dt->format))
 		{
-			while (dt->str[dt->pos_s] && !ft_strchr("%{[", dt->str[dt->pos_s])
-				&& size < 99)
-				buf[size++] = dt->str[dt->pos_s++];
-			buf[size] = 0;
-			dt->tmp = ft_strdup(buf);
+			while (*dt->format && !ft_strchr("%{[", *dt->format))
+			{
+				*(dt->buf_move++) = *(dt->format++);
+				dt->back++;
+			}
 		}
 		else
-			size = verif_char(dt);
-		dt->tot += size;
-		ft_listpushback(lst, ft_listnew(dt->tmp, size));
+			dt->back += verif_char(dt);
 	}
 }
-
+/*
 void		concatenate(t_printf *dt, t_list *lst)
 {
 	t_list	*next;
@@ -71,13 +64,12 @@ void		concatenate(t_printf *dt, t_list *lst)
 	dt->str[i] = 0;
 	free(dt->buf);
 }
-
-void		ft_init(t_printf *dt, char *str, t_list **lst)
+*/
+void		ft_init(t_printf *dt, char *str, char option)
 {
-	dt->str = str;
-	dt->pos_s = 0;
-	dt->tot = 0;
-	dt->buf = NULL;
-	dt->tmp = NULL;
-	*lst = NULL;
+	dt->format = str;
+	dt->buf_move = dt->buf;
+	dt->to_print = 0;
+	dt->back = 0;
+	dt->option = option;
 }

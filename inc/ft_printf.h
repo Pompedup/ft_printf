@@ -16,35 +16,39 @@
 # include <stdarg.h>
 # include "../libft/inc/libft.h"
 
-# define CONV "sSpbdDioOuUxXcC%"
-# define FLAG ".+ -0#hljz"
-# define DOT 1
-# define PLUS 2
-# define SPACE 4
-# define MINUS 8
-# define ZERO 16
-# define HASH 32
+# define CONV		"sSpbdDioOuUxXcC%"
+# define FLAG		".+ -0#hljz"
+# define DOT		1
+# define PLUS		2
+# define SPACE		4
+# define MINUS		8
+# define ZERO		16
+# define HASH		32
+# define FT_PRINTF	0
+# define FT_SPRINTF	1
+# define FT_FPRINTF	2
 
 typedef struct	s_printf
 {
-	char		*buf;
-	char		*str;
-	int			pos_s;
-	char		*tmp;
-	int			tot;
+	char		buf[5000];
+	char		*format;
+	char		*buf_move;
+	int			to_print;
+	int			back;
+	char		option;
 	va_list		ap;
 }				t_printf;
 
 typedef struct	s_basic
 {
 	char*		str;
-	char*		(*fct)(t_printf *dt, char c);
+	int			(*fct)(t_printf *dt, char c);
 }				t_basic;
 
 typedef struct	s_conv
 {
 	char*		str;
-	char*		(*fct)(t_printf *dt, char c, unsigned char conv);
+	int			(*fct)(t_printf *dt, char c, unsigned char conv);
 }				t_conv;
 
 typedef struct	s_color
@@ -86,8 +90,8 @@ int				color_back(t_printf *dt);
 ********************************************************************************
 */
 
-char			*flags_char(char *str, int size, t_flags data, char c);
-char			*flags_string(char *str, int size, t_flags data, char c);
+int				flags_char(char *str, int size, t_flags data, char c);
+int				flags_string(char *str, int size, t_flags data, char c);
 
 /*
 ********************************************************************************
@@ -97,8 +101,8 @@ char			*flags_string(char *str, int size, t_flags data, char c);
 ********************************************************************************
 */
 
-char			*flags_decimal(char *str, int size, t_flags data, char c);
-char			*flags_unsigned(char *str, int size, t_flags data, char c);
+int				flags_decimal(char *str, int size, t_flags data, char c);
+int				flags_unsigned(char *str, int size, t_flags data, char c);
 
 /*
 ********************************************************************************
@@ -108,9 +112,9 @@ char			*flags_unsigned(char *str, int size, t_flags data, char c);
 ********************************************************************************
 */
 
-char			*negative_number(char *begin, char *end, int size_begin);
-char			*precision(char *str, int size, t_flags data);
-char			*space(char *str, int size, t_flags data);
+int				negative_number(char *begin, char *end, int size_begin);
+int				precision(char *str, int size, t_flags data);
+int				space(char *str, int size, t_flags data);
 
 /*
 ********************************************************************************
@@ -120,7 +124,7 @@ char			*space(char *str, int size, t_flags data);
 ********************************************************************************
 */
 
-char			*flags_octal(char *str, int size, t_flags data, char c);
+int				flags_octal(char *str, int size, t_flags data, char c);
 
 /*
 ********************************************************************************
@@ -130,8 +134,8 @@ char			*flags_octal(char *str, int size, t_flags data, char c);
 ********************************************************************************
 */
 
-char			*flags_address(char *str, int size, t_flags data, char c);
-char			*flags_hexa(char *str, int size, t_flags data, char c);
+int				flags_address(char *str, int size, t_flags data, char c);
+int				flags_hexa(char *str, int size, t_flags data, char c);
 
 /*
 ********************************************************************************
@@ -151,8 +155,8 @@ int				present_flag(t_printf *dt);
 ********************************************************************************
 */
 
-char			*type_b(t_printf *dt, char c);
-char			*type_percent(t_printf *dt, char c);
+int				type_b(t_printf *dt, char c);
+int				type_percent(t_printf *dt, char c);
 
 /*
 ********************************************************************************
@@ -162,9 +166,9 @@ char			*type_percent(t_printf *dt, char c);
 ********************************************************************************
 */
 
-char			*wctoa(wchar_t c);
-char			*type_uc(t_printf *dt, char c);
-char			*type_c(t_printf *dt, char c);
+int				wctoa(char *str, wchar_t c);
+int				type_uc(t_printf *dt, char c);
+int				type_c(t_printf *dt, char c);
 
 /*
 ********************************************************************************
@@ -174,10 +178,10 @@ char			*type_c(t_printf *dt, char c);
 ********************************************************************************
 */
 
-char			*conv_i_d(t_printf *dt, char c, unsigned char conv);
-char			*conv_b_o_u_x_ux(t_printf *dt, char c, unsigned char conv);
-char			*conv_c_uc(t_printf *dt, char c, unsigned char conv);
-char			*conv_s_us(t_printf *dt, char c, unsigned char conv);
+int				conv_i_d(t_printf *dt, char c, unsigned char conv);
+int				conv_b_o_u_x_ux(t_printf *dt, char c, unsigned char conv);
+int				conv_c_uc(t_printf *dt, char c, unsigned char conv);
+int				conv_s_us(t_printf *dt, char c, unsigned char conv);
 
 /*
 ********************************************************************************
@@ -187,11 +191,11 @@ char			*conv_s_us(t_printf *dt, char c, unsigned char conv);
 ********************************************************************************
 */
 
-char			*type_i_d(t_printf *dt, char c);
-char			*type_ud(t_printf *dt, char c);
-char			*type_u(t_printf *dt, char c);
-char			*type_uu_uo(t_printf *dt, char c);
-char			*type_o_x_ux(t_printf *dt, char c);
+int				type_i_d(t_printf *dt, char c);
+int				type_ud(t_printf *dt, char c);
+int				type_u(t_printf *dt, char c);
+int				type_uu_uo(t_printf *dt, char c);
+int				type_o_x_ux(t_printf *dt, char c);
 
 /*
 ********************************************************************************
@@ -201,7 +205,7 @@ char			*type_o_x_ux(t_printf *dt, char c);
 ********************************************************************************
 */
 
-char			*type_p(t_printf *dt, char c);
+int				type_p(t_printf *dt, char c);
 
 /*
 ********************************************************************************
@@ -211,8 +215,8 @@ char			*type_p(t_printf *dt, char c);
 ********************************************************************************
 */
 
-char			*type_s(t_printf *dt, char c);
-char			*type_us(t_printf *dt, char c);
+int				type_s(t_printf *dt, char c);
+int				type_us(t_printf *dt, char c);
 
 /*
 ********************************************************************************
@@ -233,9 +237,9 @@ int				value_flag_conv(t_printf *dt, t_flags data);
 ********************************************************************************
 */
 
-void			get_lst(t_printf *dt, t_list **lst);
+void			get_lst(t_printf *dt);
 void			concatenate(t_printf *dt, t_list *lst);
-void			ft_init(t_printf *dt, char *str, t_list **lst);
+void			ft_init(t_printf *dt, char *str, char option);
 
 /*
 ********************************************************************************

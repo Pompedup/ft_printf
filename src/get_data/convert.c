@@ -16,9 +16,10 @@
 ** Gestion des %d %i avec conversion.
 */
 
-char	*conv_i_d(t_printf *dt, char c, unsigned char conv)
+int		conv_i_d(t_printf *dt, char c, unsigned char conv)
 {
 	long long			var;
+	int					size;
 
 	(void)c;
 	var = 0;
@@ -34,17 +35,21 @@ char	*conv_i_d(t_printf *dt, char c, unsigned char conv)
 		var = (long long)((char)(va_arg(dt->ap, int)));
 	else
 		var = (long long)((short)(va_arg(dt->ap, int)));
-	return (ft_lltoa_base(var, 10, 0));
+	size = ft_lltoa_base(dt->buf_move, var, 10, 0);
+	dt->buf_move += size;
+	dt->to_print += size;
+	return (size);
 }
 
 /*
 ** Gestion des %o %u %x %X avec conversion.
 */
 
-char	*conv_b_o_u_x_ux(t_printf *dt, char c, unsigned char conv)
+int		conv_b_o_u_x_ux(t_printf *dt, char c, unsigned char conv)
 {
 	unsigned long long	var;
 	int					base;
+	int					size;
 
 	var = 0;
 	if (conv & 32)
@@ -61,21 +66,22 @@ char	*conv_b_o_u_x_ux(t_printf *dt, char c, unsigned char conv)
 	else
 		var = (unsigned long long)((unsigned short)
 			(va_arg(dt->ap, unsigned int)));
-	if (c == 'x' || c == 'X')
-		base = 16;
-	else if (c == 'b')
-		base = 2;
+	if (c == 'x' || c == 'X' || c == 'b')
+		base = c == 'b' ? 2 : 16;
 	else
 		base = (c == 'o' || c == 'O') ? 8 : 10;
-	return (ft_ulltoa_base(var, base, c == 'X'));
+	size = ft_ulltoa_base(dt->buf_move, var, base, c == 'X');
+	dt->buf_move += size;
+	dt->to_print += size;
+	return (size);
 }
 
-char	*conv_c_uc(t_printf *dt, char c, unsigned char conv)
+int		conv_c_uc(t_printf *dt, char c, unsigned char conv)
 {
 	return (conv & 4 ? type_uc(dt, c) : type_c(dt, c));
 }
 
-char	*conv_s_us(t_printf *dt, char c, unsigned char conv)
+int		conv_s_us(t_printf *dt, char c, unsigned char conv)
 {
 	return (conv & 4 ? type_us(dt, c) : type_s(dt, c));
 }

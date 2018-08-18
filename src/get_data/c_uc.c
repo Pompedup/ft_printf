@@ -65,55 +65,53 @@ static void	sort_char(unsigned char *back, int c, int size)
 **	Gestion des unicodes
 */
 
-char		*wctoa(wchar_t c)
+int			wctoa(char *str, wchar_t c)
 {
-	char			*back;
 	unsigned int	bin;
 	int				i;
 	int				size;
 
-	i = 0;
+	size = 1;
 	bin = 2147483648;
 	i = 32;
-	if (i == 0)
-		return (ft_strdup("\0"));
 	while (!(bin & c) && bin)
 	{
 		bin /= 2;
 		i--;
 	}
 	if (i < 8)
-		back = ft_strdup((char *)&c);
+		*str = c;
 	else
 	{
 		size = (i - 2) / 5 + 1;
-		if (!(back = (char *)malloc(size + 1)))
-			return (NULL);
-		sort_char((unsigned char*)back, c, size);
+		sort_char((unsigned char*)str, c, size);
 	}
-	return (back);
+	return (size);
 }
 
 /*
 ** Gestion des caractères unicode.
 */
 
-char		*type_uc(t_printf *dt, char c)
+int			type_uc(t_printf *dt, char c)
 {
+	int size;
+
 	(void)c;
-	return (wctoa(va_arg(dt->ap, wchar_t)));
+	size = wctoa(dt->buf_move, va_arg(dt->ap, wchar_t));
+	dt->buf_move += size;
+	dt->to_print += size;
+	return (size);
 }
 
 /*
 ** Gestion des caractères simple.
 */
 
-char		*type_c(t_printf *dt, char c)
+int			type_c(t_printf *dt, char c)
 {
-	char	back[2];
-
 	(void)c;
-	back[0] = (char)va_arg(dt->ap, int);
-	back[1] = 0;
-	return (ft_strdup(back));
+	*(dt->buf_move++) = (char)va_arg(dt->ap, int);
+	dt->to_print++;
+	return (1);
 }

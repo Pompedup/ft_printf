@@ -36,6 +36,13 @@ static int	apply_flag(t_printf *dt, t_flags data, int size)
 	}
 	if (!ft_strchr("idDuUxXpoOsS", *(dt->buf_move - 1)))
 		dt->tmp = flags_char(dt->tmp, size, data, *(dt->buf_move - 1));
+	return (ft_strlen(dt->tmp));
+}
+
+static int	get_str(t_printf *dt, t_flags data)
+{
+	int		size;
+
 	if ((data.convert && ft_strchr("bdiouxXcsS", dt->buf_move))
 		|| (ft_strchr("sS", dt->buf_move) && data.forme & DOT))
 		size = value_flag_conv(dt, data);
@@ -51,13 +58,6 @@ static int	apply_flag(t_printf *dt, t_flags data, int size)
 		else
 			size = value_flag(dt);
 	}
-	return (ft_strlen(dt->tmp));
-}
-
-static int	get_str(t_printf *dt, t_flags data)
-{
-	int		size;
-
 	if (*(dt->tmp) == 0 && ft_strchr("%cC", *(dt->buf_move - 1)))
 	{
 		dt->tmp = flags_char(dt->tmp, size, data, *(dt->buf_move - 1));

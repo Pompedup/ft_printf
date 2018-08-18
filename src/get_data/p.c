@@ -16,9 +16,17 @@
 ** Gestion des %p.
 */
 
-char	*type_p(t_printf *dt, char c)
+int	type_p(t_printf *dt, char c)
 {
+	int size;
+
 	(void)c;
-	return (ft_strmjoin("0x", ft_ulltoa_base(
-		(unsigned long long)va_arg(dt->ap, void *), 16, 0), 2));
+	strcpy(dt->buf_move, "Ox");
+	dt->buf_move += 2;
+	size = ft_ulltoa_base(dt->buf_move,
+		(unsigned long long)va_arg(dt->ap, void *),
+		16, 0);
+	dt->buf_move += size;
+	dt->to_print += size;
+	return (size);
 }

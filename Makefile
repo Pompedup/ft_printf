@@ -30,10 +30,10 @@ GET_DATA =	b_percent.c\
 GET_LST =	get_lst.c\
 
 SRC_NAME =	ft_printf.c\
-			$(addprefix bonus/,$(BONUS))\
-			$(addprefix flags/,$(FLAGS))\
 			$(addprefix get_data/,$(GET_DATA))\
 			$(addprefix get_lst/,$(GET_LST))\
+			#$(addprefix bonus/,$(BONUS))\
+			$(addprefix flags/,$(FLAGS))\
 
 SRC = $(addprefix src/,$(SRC_NAME))
 

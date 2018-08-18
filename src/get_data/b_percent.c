@@ -16,19 +16,25 @@
 ** Gestion des %b
 */
 
-char	*type_b(t_printf *dt, char c)
+int	type_b(t_printf *dt, char c)
 {
+	int size;
 	(void)c;
-	return (ft_ulltoa_base(va_arg(dt->ap, unsigned int), 2, 0));
+	
+	size = ft_ulltoa_base(dt->buf_move, va_arg(dt->ap, unsigned int), 2, 0);
+	dt->buf_move += size;
+	dt->to_print += size;
+	return (size);
 }
 
 /*
 ** Gestion des %%
 */
 
-char	*type_percent(t_printf *dt, char c)
+int	type_percent(t_printf *dt, char c)
 {
 	(void)c;
-	(void)dt;
-	return (ft_strdup("%"));
+	*(dt->buf_move++) = '%';
+	dt->to_print++;
+	return (1);
 }

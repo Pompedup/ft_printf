@@ -16,51 +16,76 @@
 ** Gestion des %i et %d.
 */
 
-char	*type_i_d(t_printf *dt, char c)
+int	type_i_d(t_printf *dt, char c)
 {
+	int size;
+
 	(void)c;
-	return (ft_lltoa_base((long long)(va_arg(dt->ap, int)), 10, 0));
+	size = ft_lltoa_base(dt->buf_move, (long long)(va_arg(dt->ap, int)), 10, 0);
+	dt->buf_move += size;
+	dt->to_print += size;
+	return (size);
 }
 
 /*
 ** Gestion des %D et %O.
 */
 
-char	*type_ud(t_printf *dt, char c)
+int	type_ud(t_printf *dt, char c)
 {
+	int size;
+	
 	(void)c;
-	return (ft_lltoa_base((va_arg(dt->ap, long long)),
-		10, 0));
+	size = ft_lltoa_base(dt->buf_move, va_arg(dt->ap, long long), 10, 0);
+	dt->buf_move += size;
+	dt->to_print += size;
+	return (size);
 }
 
 /*
 ** Gestion des %u.
 */
 
-char	*type_u(t_printf *dt, char c)
+int	type_u(t_printf *dt, char c)
 {
+	int size;
+
 	(void)c;
-	return (ft_ulltoa_base((unsigned long long)(va_arg(dt->ap, unsigned int)),
-		10, 0));
+	size = ft_ulltoa_base(dt->buf_move, (unsigned long long)(va_arg(dt->ap,
+		unsigned int)), 10, 0);
+	dt->buf_move += size;
+	dt->to_print += size;
+	return (size);
 }
 
 /*
 ** Gestion des %U.
 */
 
-char	*type_uu_uo(t_printf *dt, char c)
+int	type_uu_uo(t_printf *dt, char c)
 {
+	int size;
+
 	(void)c;
-	return (ft_ulltoa_base((unsigned long long)(va_arg(dt->ap, unsigned long)),
-		c == 'U' ? 10 : 8, 0));
+	size = ft_ulltoa_base(dt->buf_move,
+		(unsigned long long)(va_arg(dt->ap, unsigned long)),
+		c == 'U' ? 10 : 8, 0);
+	dt->buf_move += size;
+	dt->to_print += size;
+	return (size);
 }
 
 /*
 ** Gestion des %o %x et %X.
 */
 
-char	*type_o_x_ux(t_printf *dt, char c)
+int	type_o_x_ux(t_printf *dt, char c)
 {
-	return (ft_lltoa_base((long long)(va_arg(dt->ap, unsigned int)),
-		c == 'o' ? 8 : 16, c == 'X'));
+	int size;
+
+	size = ft_lltoa_base(dt->buf_move, (long long)(va_arg(dt->ap, unsigned int)),
+		c == 'o' ? 8 : 16, c == 'X');
+	dt->buf_move += size;
+	dt->to_print += size;
+	return (size);
 }

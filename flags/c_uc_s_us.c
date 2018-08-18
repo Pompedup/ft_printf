@@ -17,18 +17,33 @@
 
 #include "ft_printf.h"
 
-int			flags_char(t_printf *dt, int size, t_flags data, char c)
+static char	*char_null(char *str, t_flags data)
 {
-	if (data.space <= size)
-		return (size);
+	free(str);
 	if (data.forme & ZERO && !(data.forme & MINUS))
-		back = ft_memset(dt->buf_move, '0', data.space - size);
-	else if (!(data.forme & MINUS))
-		back = ft_memset(dt->buf_move, ' ', data.space - size);
-	//recuperation du contenu
-	if (data.forme & MINUS)
-		back = ft_memset(dt->buf_move, ' ', data.space - size);
-	return (data.space);
+		str = ft_strnewset('0', data.space);
+	else
+		str = ft_strnewset(' ', data.space);
+	str[data.forme & MINUS ? 0 : data.space - 1] = 0;
+	return (str);
+}
+
+char		*flags_char(char *str, int size, t_flags data, char c)
+{
+	char *back;
+
+	if (data.space <= size)
+		return (str);
+	if (*str == '\0' && ft_strchr("%cC", c))
+		return (char_null(str, data));
+	if (data.forme & ZERO && !(data.forme & MINUS))
+		back = ft_strnewset('0', data.space - size);
+	else
+		back = ft_strnewset(' ', data.space - size);
+	if (!back)
+		return (NULL);
+	return (data.forme & 8 ? ft_strmjoin(str, back, 3)
+		: ft_strmjoin(back, str, 3));
 }
 
 static char	*precision_s(char *str, int size, t_flags data)
