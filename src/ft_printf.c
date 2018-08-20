@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pompedup <pompedup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:38:10 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/18 17:26:50 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/19 16:30:05 by pompedup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		ft_init(t_printf *dt, char *str, char option)
 {
 	dt->format = str;
 	dt->buf_move = dt->buf;
-	dt->less = BUFF_SIZE;
+	dt->less = BUFF_PRF;
 	dt->back = 0;
 	dt->option = option;
 }
@@ -29,7 +29,7 @@ int			ft_printf(char *format, ...)
 	va_start(dt.ap, format);
 	process_format(&dt);
 	write(1, dt.buf, BUFF_PRF - dt.less);
-	return (dt.back);
+	return (BUFF_PRF - dt.less);
 }
 
 

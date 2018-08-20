@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pompedup <pompedup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:38:37 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/18 18:18:59 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/19 16:42:09 by pompedup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # define MINUS		(1 << 3)
 # define ZERO		(1 << 4)
 # define HASH		(1 << 5)
-# define HH			(1 << 6)
-# define H			(1 << 7)
+# define H			(1 << 6)
+# define HH			(1 << 7)
 # define L			(1 << 8)
 # define LL			(1 << 9)
 # define J			(1 << 10)
@@ -79,7 +79,9 @@ typedef struct	s_applyflags
 	char*		(*fct)(char *str, int size, t_flags data, char c);
 }				t_applyflags;
 */
-
+void	get_unsigned(t_printf *dt, t_flags *dt_flags, char type);
+void	get_signed(t_printf *dt, t_flags *dt_flags, char type);
+void	type_c(t_printf *dt, t_flags *dt_flags, char type);
 void	type_s(t_printf *dt, t_flags *dt_flags, char type);
 
 /*
@@ -92,6 +94,7 @@ void	type_s(t_printf *dt, t_flags *dt_flags, char type);
 
 void			process_format(t_printf *dt);
 void			rotative_buf(t_printf *dt, char *src, int to_cpy);
+void			padding(t_printf *dt, t_flags *dt_flags, t_bool before);
 
 /*
 ********************************************************************************
@@ -123,6 +126,7 @@ int				ft_printf(char *str, ...);
 ********************************************************************************
 */
 
+int				biggest(int a, int b);
 int				smallest(int a, int b);
 
 #endif

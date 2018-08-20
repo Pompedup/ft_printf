@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   bordel.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pompedup <pompedup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 18:12:28 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/18 18:13:00 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/19 12:44:41 by pompedup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int biggest(int a, int b)
+{
+	return (a > b ? a : b);
+}
 
 int	smallest(int a, int b)
 {
