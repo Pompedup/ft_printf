@@ -6,7 +6,7 @@
 /*   By: pompedup <pompedup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/16 13:49:32 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/19 15:47:26 by pompedup         ###   ########.fr       */
+/*   Updated: 2018/08/21 14:51:43 by pompedup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,18 @@
 
 static void	get_data(t_printf *dt, t_flags *dt_flags, char type)
 {
-	if (type == 's')
+	if (dt_flags->flags & MINUS && dt_flags->flags & ZERO)
+		dt_flags->flags -= ZERO;
+	if (ft_strchr("diDpboOuUxX", type))
+	{
+		if (dt_flags->flags & DOT && dt_flags->flags & ZERO)
+			dt_flags->flags -= ZERO;
+		if (ft_strchr("diD", type))
+			get_signed(dt, dt_flags, type);
+		else
+			get_unsigned(dt, dt_flags, type);
+	}
+	else if (type == 's')
 		type_s(dt, dt_flags, type);
 	//else if (type == 'S')
 	//	type_us(dt, dt_flags, type);
@@ -22,8 +33,6 @@ static void	get_data(t_printf *dt, t_flags *dt_flags, char type)
 	//	type_p(dt, dt_flags, type);
 	//else if (type == 'b')
 	//	type_b(dt, dt_flags, type);
-	else if (type == 'd')
-		get_signed(dt, dt_flags, type);
 	//else if (type == 'D')
 	//	type_ud(dt, dt_flags, type);
 	//else if (type == 'i')
@@ -40,10 +49,8 @@ static void	get_data(t_printf *dt, t_flags *dt_flags, char type)
 	//	type_x(dt, dt_flags, type);
 	//else if (type == 'X')
 	//	type_ux(dt, dt_flags, type);
-	else if (type == 'c')
+	else if (type)
 		type_c(dt, dt_flags, type);
-	else
-		get_unsigned(dt, dt_flags, type);
 	//else if (type == 'C')
 	//	type_uc(dt, dt_flags, type);
 	//else
@@ -80,6 +87,7 @@ void		rotative_buf(t_printf *dt, char *src, int to_cpy)
 			write(1, dt->buf, BUFF_PRF);
 			dt->buf_move = dt->buf;
 			dt->less = BUFF_PRF;
+			dt->tot += BUFF_PRF;
 		}
 	}
 }

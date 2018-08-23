@@ -6,7 +6,7 @@
 /*   By: pompedup <pompedup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:54:25 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/19 01:20:12 by pompedup         ###   ########.fr       */
+/*   Updated: 2018/08/20 23:36:07 by pompedup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ void	type_c(t_printf *dt, t_flags *dt_flags, char type)
 	char	c;
 
 	(void)type;
-	c = (char)va_arg(dt->ap, wchar_t);
+	if (type == 'c')
+		c = (char)va_arg(dt->ap, wchar_t);
+	else
+		c = type;
 	dt_flags->space = dt_flags->space > 1 ? dt_flags->space - 1 : 0;
 	padding(dt, dt_flags, TRUE);
 	rotative_buf(dt, &c, 1);

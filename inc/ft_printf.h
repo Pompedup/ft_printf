@@ -6,7 +6,7 @@
 /*   By: pompedup <pompedup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:38:37 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/19 16:42:09 by pompedup         ###   ########.fr       */
+/*   Updated: 2018/08/21 17:22:08 by pompedup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,18 @@ typedef struct	s_printf
 	int			less;
 	int			back;
 	char		option;
+	char		**hash;
+	int			tot;
 	va_list		ap;
 }				t_printf;
 
 typedef struct	s_flags
 {
+	char			c;
+	char			*hash;
+	int				len;
+	int				len_space;
+	int				base;
 	int				flags;
 	int				space;
 	int				precision;

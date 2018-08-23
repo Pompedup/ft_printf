@@ -6,7 +6,7 @@
 /*   By: pompedup <pompedup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 16:55:07 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/19 16:41:57 by pompedup         ###   ########.fr       */
+/*   Updated: 2018/08/21 14:47:41 by pompedup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,5 @@ char		*get_flags(char *format, t_flags *dt_flags)
 		else if (tmp > -1)
 			dt_flags->flags |= 1 << tmp;
 	}
-	if ((dt_flags->flags & DOT || dt_flags->flags & MINUS)
-		&& dt_flags->flags & ZERO)
-		dt_flags->flags -= ZERO;
 	return (format);
 }
