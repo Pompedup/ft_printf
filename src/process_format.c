@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_format.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pompedup <pompedup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/16 13:49:32 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/21 14:51:43 by pompedup         ###   ########.fr       */
+/*   Updated: 2018/08/23 16:30:58 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	get_data(t_printf *dt, t_flags *dt_flags, char type)
 {
+	dt_flags->type = type;
 	if (dt_flags->flags & MINUS && dt_flags->flags & ZERO)
 		dt_flags->flags -= ZERO;
 	if (ft_strchr("diDpboOuUxX", type))
@@ -25,7 +26,7 @@ static void	get_data(t_printf *dt, t_flags *dt_flags, char type)
 		else
 			get_unsigned(dt, dt_flags, type);
 	}
-	else if (type == 's')
+	else if (ft_strchr("sS", type))
 		type_s(dt, dt_flags, type);
 	//else if (type == 'S')
 	//	type_us(dt, dt_flags, type);
@@ -112,26 +113,18 @@ void		process_format(t_printf *dt)
 	}
 }
 
-void		padding(t_printf *dt, t_flags *dt_flags, t_bool before)
+void		padding(t_printf *dt, t_flags *dt_flags, t_bool precision)
 {
-	char c;
+	char	c;
+	int		size;
 
-	if (!dt_flags->space)
+	size = precision ? dt_flags->precision : dt_flags->space;
+	if (!size)
 		return ;
-	c = dt_flags->flags & ZERO ? '0' : ' ';
-	if (before && !(dt_flags->flags & MINUS))
-	{
-		ft_memset(dt->buf_move, c, dt_flags->space);
-		dt->buf_move += dt_flags->space;
-		dt->less -= dt_flags->space;
-		dt_flags->space = 0;
-	}
-	else if (!before && dt_flags->flags & MINUS)
-	{
-		ft_memset(dt->buf_move, c, dt_flags->space);
-		dt->buf_move += dt_flags->space;
-		dt->less -= dt_flags->space;
-	}
+	c = precision ? '0' : ' ';
+	ft_memset(dt->buf_move, c, size);
+	dt->buf_move += size;
+	dt->less -= size;
 }
 /*
 void	padding(t_printf *p, int n)

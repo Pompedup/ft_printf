@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pompedup <pompedup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:38:37 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/21 17:22:08 by pompedup         ###   ########.fr       */
+/*   Updated: 2018/08/23 14:25:43 by abezanni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,15 @@ typedef struct	s_printf
 
 typedef struct	s_flags
 {
+	char			type;
 	char			c;
 	char			*hash;
 	int				len;
-	int				len_space;
 	int				base;
 	int				flags;
 	int				space;
 	int				precision;
+
 }				t_flags;
 
 /*
@@ -101,7 +102,7 @@ void	type_s(t_printf *dt, t_flags *dt_flags, char type);
 
 void			process_format(t_printf *dt);
 void			rotative_buf(t_printf *dt, char *src, int to_cpy);
-void			padding(t_printf *dt, t_flags *dt_flags, t_bool before);
+void			padding(t_printf *dt, t_flags *dt_flags, t_bool precision);
 
 /*
 ********************************************************************************
@@ -135,5 +136,8 @@ int				ft_printf(char *str, ...);
 
 int				biggest(int a, int b);
 int				smallest(int a, int b);
+
+
+void	apply_flags(t_flags *dt_flags, t_bool neg, t_bool signe, uintmax_t nbr);
 
 #endif
