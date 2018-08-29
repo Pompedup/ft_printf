@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_strings.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pompedup <pompedup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:54:25 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/23 17:15:18 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/24 13:29:55 by pompedup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ void	long_string(t_printf *dt, t_flags *dt_flags, wchar_t *str)
 
 	i = 0;
 	size = 0;
-	while (str[i] && (dt_flags->precision ? size < dt_flags->precision : 1))
+	while (str[i] && (dt_flags->flags & DOT ? size < dt_flags->precision : 1))
 		size += wchar_t_len(str[i++]);
-	if (dt_flags->precision && size > dt_flags->precision)
+	if (dt_flags->flags & DOT && size > dt_flags->precision)
 		size -= wchar_t_len(str[--i]);
 	dt_flags->precision = 0;
 	if (dt_flags->flags & ZERO)

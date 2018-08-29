@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_numbers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pompedup <pompedup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/19 01:20:44 by pompedup          #+#    #+#             */
-/*   Updated: 2018/08/23 17:51:46 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/24 02:30:15 by pompedup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,14 @@ void	get_unsigned(t_printf *dt, t_flags *dt_flags, char type)
 		dt_flags->base = 2;
 	else
 		dt_flags->base = 10;
-	if (dt_flags->flags & Z && !(ft_strchr("pUO", type)))
-		tmp = (uintmax_t)va_arg(dt->ap, size_t);
-	else if (dt_flags->flags & HH && !(ft_strchr("pUO", type)))
-		tmp = (uintmax_t)(char)va_arg(dt->ap, unsigned int);
-	else if (dt_flags->flags & H || (ft_strchr("pUO", type)))
-		tmp = (uintmax_t)(short)va_arg(dt->ap, unsigned int);
-	else if (dt_flags->flags & L)
+	if (dt_flags->flags & L || (ft_strchr("pUO", type)))
 		tmp = (uintmax_t)va_arg(dt->ap, unsigned long);
+	else if (dt_flags->flags & Z)
+		tmp = (uintmax_t)va_arg(dt->ap, size_t);
+	else if (dt_flags->flags & HH)
+		tmp = (uintmax_t)(unsigned char)va_arg(dt->ap, unsigned int);
+	else if (dt_flags->flags & H)
+		tmp = (uintmax_t)(unsigned short)va_arg(dt->ap, unsigned int);
 	else if (dt_flags->flags & LL)
 		tmp = (uintmax_t)va_arg(dt->ap, unsigned long long);
 	else if (dt_flags->flags & J)
