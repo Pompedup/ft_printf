@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_format.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pompedup <pompedup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/16 13:49:32 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/23 16:30:58 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/31 14:04:11 by pompedup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,37 +28,11 @@ static void	get_data(t_printf *dt, t_flags *dt_flags, char type)
 	}
 	else if (ft_strchr("sS", type))
 		type_s(dt, dt_flags, type);
-	//else if (type == 'S')
-	//	type_us(dt, dt_flags, type);
-	//else if (type == 'p')
-	//	type_p(dt, dt_flags, type);
-	//else if (type == 'b')
-	//	type_b(dt, dt_flags, type);
-	//else if (type == 'D')
-	//	type_ud(dt, dt_flags, type);
-	//else if (type == 'i')
-	//	type_d(dt, dt_flags, type);
-	//else if (type == 'o')
-	//	type_o(dt, dt_flags, type);
-	//else if (type == 'O')
-	//	type_uo(dt, dt_flags, type);
-	//else if (type == 'u')
-	//	type_u(dt, dt_flags, type);
-	//else if (type == 'U')
-	//	type_uu(dt, dt_flags, type);
-	//else if (type == 'x')
-	//	type_x(dt, dt_flags, type);
-	//else if (type == 'X')
-	//	type_ux(dt, dt_flags, type);
-	else if (type)
+	else
 		type_c(dt, dt_flags, type);
-	//else if (type == 'C')
-	//	type_uc(dt, dt_flags, type);
-	//else
-	//	no_type(dt, dt_flags, type);
 }
 
-static int	process_data(t_printf *dt)
+static void	process_data(t_printf *dt)
 {
 	t_flags dt_flags;
 
@@ -67,9 +41,11 @@ static int	process_data(t_printf *dt)
 	dt_flags.precision = 0;
 	if (ft_strchr(FLAG, *dt->format) != NULL || ft_isdigit(*dt->format))
 		dt->format = get_flags(dt->format, &dt_flags);
-	get_data(dt, &dt_flags, *dt->format);
-	dt->format++;
-	return (0);
+	if (*dt->format)
+	{
+		get_data(dt, &dt_flags, *dt->format);
+		dt->format++;
+	}
 }
 
 void		rotative_buf(t_printf *dt, char *src, int to_cpy)
@@ -85,7 +61,11 @@ void		rotative_buf(t_printf *dt, char *src, int to_cpy)
 		to_cpy -= size;
 		if (dt->less == 0)
 		{
-			write(1, dt->buf, BUFF_PRF);
+			if (dt->option == FT_SPRINTF)
+				dt->str = ft_memjoin(dt->str, dt->buf,
+					dt->tot, BUFF_PRF - dt->less);
+			else
+				write(dt->fd, dt->buf, BUFF_PRF);
 			dt->buf_move = dt->buf;
 			dt->less = BUFF_PRF;
 			dt->tot += BUFF_PRF;
@@ -102,7 +82,8 @@ void		process_format(t_printf *dt)
 		if (ft_strchr("%", *dt->format))
 		{
 			dt->format++;
-			dt->back += process_data(dt);
+			if (*(dt->format))
+				process_data(dt);
 		}
 		else
 		{
@@ -126,17 +107,3 @@ void		padding(t_printf *dt, t_flags *dt_flags, t_bool precision)
 	dt->buf_move += size;
 	dt->less -= size;
 }
-/*
-void	padding(t_printf *p, int n)
-{
-	if (!p->padding)
-		return ;
-	p->c = 32 | (p->f & F_ZERO);
-	if (!n && !(p->f & F_MINUS))
-		while (p->padding--)
-			buffer(p, &p->c, 1);
-	else if (n && (p->f & F_MINUS))
-		while (p->padding--)
-			buffer(p, &p->c, 1);
-}
-*/

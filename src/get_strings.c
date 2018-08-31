@@ -6,7 +6,7 @@
 /*   By: pompedup <pompedup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:54:25 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/24 13:29:55 by pompedup         ###   ########.fr       */
+/*   Updated: 2018/08/30 15:28:07 by pompedup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	type_s(t_printf *dt, t_flags *dt_flags, char type)
 			len = 6;
 		else
 			len = (int)ft_strlen((char*)str);
-		dt_flags->flags & DOT ? len = smallest(len, dt_flags->precision) : 0;
+		dt_flags->flags & DOT ? len = ft_smallest(len, dt_flags->precision) : 0;
 		dt_flags->precision = 0;
 		if (dt_flags->flags & ZERO)
 		{

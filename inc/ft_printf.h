@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pompedup <pompedup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:38:37 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/23 14:25:43 by abezanni         ###   ########.fr       */
+/*   Updated: 2018/08/30 15:53:00 by pompedup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@
 
 typedef struct	s_printf
 {
-	char		buf[BUFF_PRF];
 	char		*format;
-	char		*buf_move;
-	int			less;
-	int			back;
+	int			fd;
 	char		option;
-	char		**hash;
+	char		buf[BUFF_PRF];
+	char		*buf_move;
+	char		*str;
+	int			less;
 	int			tot;
 	va_list		ap;
 }				t_printf;
@@ -63,29 +63,11 @@ typedef struct	s_flags
 }				t_flags;
 
 /*
-typedef struct	s_basic
-{
-	char*		str;
-	int			(*fct)(t_printf *dt, char c);
-}				t_basic;
-
-typedef struct	s_conv
-{
-	char*		str;
-	int			(*fct)(t_printf *dt, char c, unsigned char conv);
-}				t_conv;
-
 typedef struct	s_color
 {
 	char		*color;
 	char		*color_code;
 }				t_color;
-
-typedef struct	s_applyflags
-{
-	char*		str;
-	char*		(*fct)(char *str, int size, t_flags data, char c);
-}				t_applyflags;
 */
 void	get_unsigned(t_printf *dt, t_flags *dt_flags, char type);
 void	get_signed(t_printf *dt, t_flags *dt_flags, char type);
@@ -123,19 +105,8 @@ char			*get_flags(char *format, t_flags *data);
 */
 
 int				ft_printf(char *str, ...);
-//int				ft_fprintf(int fd, char *format, ...);
+int				ft_fprintf(int fd, char *format, ...);
 //int				ft_sprintf(char **str, char *format, ...);
-
-/*
-********************************************************************************
-**                                                                            **
-**   bordel.c                                                                 **
-**                                                                            **
-********************************************************************************
-*/
-
-int				biggest(int a, int b);
-int				smallest(int a, int b);
 
 
 void	apply_flags(t_flags *dt_flags, t_bool neg, t_bool signe, uintmax_t nbr);

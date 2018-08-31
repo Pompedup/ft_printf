@@ -6,7 +6,7 @@
 /*   By: pompedup <pompedup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 16:55:07 by abezanni          #+#    #+#             */
-/*   Updated: 2018/08/21 14:47:41 by pompedup         ###   ########.fr       */
+/*   Updated: 2018/08/30 15:03:42 by pompedup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*get_convert(char *format, t_flags *dt_flags, int conv)
 		format++;
 	}
 	if (dt_flags->flags < (1 << conv))
-		dt_flags->flags += 1 << conv;
+		dt_flags->flags = (dt_flags->flags & 63) + (1 << conv);
 	return (format);
 }
 

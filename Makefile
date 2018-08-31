@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abezanni <abezanni@student.42.fr>          +#+  +:+       +#+         #
+#    By: pompedup <pompedup@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/03 18:57:57 by abezanni          #+#    #+#              #
-#    Updated: 2018/08/23 14:26:28 by abezanni         ###   ########.fr        #
+#    Updated: 2018/08/30 15:13:01 by pompedup         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ SRC_NAME =	ft_printf.c\
 			get_strings.c\
 			process_format.c\
 			get_numbers.c\
-			bordel.c\
 			apply_flags_numbers.c\
 			#$(addprefix bonus/,$(BONUS))\
 			$(addprefix get_data/,$(GET_DATA))\

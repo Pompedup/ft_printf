@@ -6,7 +6,7 @@
 /*   By: pompedup <pompedup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/19 01:20:44 by pompedup          #+#    #+#             */
-/*   Updated: 2018/08/24 02:30:15 by pompedup         ###   ########.fr       */
+/*   Updated: 2018/08/31 13:58:51 by pompedup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	addnbr(char *buf, uintmax_t nbr, char *str_base, int base)
 {
 	if (!nbr)
 		*buf = '0';
-	//ft_putendl(buf);////ft_putnbrendl(dt_flags->len);
 	while (nbr)
 	{
 		*buf = str_base[nbr % base];
@@ -27,7 +26,7 @@ void	addnbr(char *buf, uintmax_t nbr, char *str_base, int base)
 
 void	get_len(t_flags *dt_flags, uintmax_t nbr)
 {
-	dt_flags->len = nbr == 0 && !(dt_flags->flags & DOT && !dt_flags->precision) ? 1 : 0;
+	dt_flags->len = !nbr && !(dt_flags->flags & DOT) ? 1 : 0;
 	while (nbr)
 	{
 		nbr /= dt_flags->base;
